@@ -1,1 +1,1 @@
-# petshop-react
+# petshop

@@ -1,0 +1,34 @@
+Seguem abaixo a descrição do projeto de vocês e um exemplo das telas.
+
+PET - SHOP
+
+	USUÁRIOS
+	- CADASTRO
+	- CONSULTA
+	- RELATORIO
+	- NÍVEL DE ACESSO
+	- LOGIN
+
+	- CLIENTES
+	CADASTRO
+       CADASTRO DE PET (COM ASSOCIAÇÃO AO CLIENTE /DONO)
+	CONSULTA
+	RELATORIO
+
+	- VENDAS
+		FLUXO DE CAIXA
+		RELATORIO
+
+	COMPRAS
+		ENTRADA
+		ORDEM DE COMPRA
+
+	- SERVIÇOS
+		CADASTRO
+		CONSULTA
+		RELATORIO
+
+
+	-Transporte
+		AGENDAMENTO
+		SITUAÇÃO
