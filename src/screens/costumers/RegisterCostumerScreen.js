@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TextInput, TouchableHighlight } from 'react-nat
 import { Image, Input } from 'react-native-elements';
 const util = require('util');
 
-export default class SignUpScreen extends React.Component {
+export default class RegisterCostumerScreen extends React.Component {
   static navigationOptions ={
     title: 'Cadastrar'
   };
@@ -11,36 +11,32 @@ export default class SignUpScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image 
-          source={require('../../../assets/img/logo.jpeg')}
-          style={{width: 100, height: 100}}
-        />
-
         <View>
             <Text>
-                INFORME ALGUNS DADOS
+                Tela de Cadastro de Pet
             </Text>
         </View>
 
         <View style={styles.loginPanel}>
           <TextInput 
-            placeholder="Nome completo"
+            placeholder="Nome completo do Dono"
             style={styles.loginPanelInput}
           />
           <TextInput 
-            placeholder="e-mail"
+            placeholder="E-mail"
             style={styles.loginPanelInput}
           />
           <TextInput 
-            placeholder="usuario"
+            placeholder="Nome do Pet"
             style={styles.loginPanelInput}
           />
           <TextInput 
-            placeholder="senha"
+            placeholder="Idade do Pet"
             style={styles.loginPanelInput}
+            keyboardType="number-pad"
           />
           <TouchableHighlight style={styles.loginPanelBtnAlt}
-          onPress={() => this.props.navigation.navigate('LoginScreen')}>
+          onPress={() => this.props.navigation.navigate('CostumersScreen')}>
             <Text style={{color: 'white'}}>CONCLUIR</Text>
           </TouchableHighlight>
         </View>        
