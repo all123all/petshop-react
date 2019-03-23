@@ -5,29 +5,29 @@ import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
 const util = require('util');
 
-export default class CostumersScreen extends React.Component {
+export default class ServiceScreen extends React.Component {
   static navigationOptions ={
-    title: 'Clientes'
+    title: 'Serviços'
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.btnPanel}>          
-          <TouchableOpacity 
-            style={styles.btnOptionClientes}
-            onPress={() => this.props.navigation.navigate('RegisterCostumerScreen')}>
-            <Text style={{color: 'white'}}>Cadastro de PET</Text>
-          </TouchableOpacity>
-          <TouchableOpacity 
-            style={styles.btnOptionClientes}
-            onPress={() => this.props.navigation.navigate('ConsultCostumerScreen')}>
-            <Text style={{color: 'white'}}>Consulta</Text>
-          </TouchableOpacity>
+        <View style={styles.btnPanel}>        
           <Image 
-            source={require('../../../assets/img/pug.jpg')}
+            source={require('../../../assets/img/pet-groomer.png')}
             style={styles.imgContainer}
           />
+          <TouchableOpacity 
+            style={styles.btnOptionClientes}
+            onPress={() => this.props.navigation.navigate('ConsultServiceScreen')}>
+            <Text style={{color: 'white'}}>Serviços em aberto</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={styles.btnOptionClientes}
+            onPress={() => this.props.navigation.navigate('RegisterServiceScreen')}>
+            <Text style={{color: 'white'}}>Realizar novo serviço</Text>
+          </TouchableOpacity>
         </View>
       </View>
       
@@ -49,20 +49,16 @@ const styles = StyleSheet.create({
   btnOptionClientes:{
     marginTop: '1%',
     width: '100%',
-    height: '13%',
+    height: '20%',
     backgroundColor: '#AF3E2E',
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  welcomeContainer:{
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   imgContainer:{
-    marginTop: '80%',
-    width: 50,
-    height: 55,
+    width: 120,
+    height: 120,
     alignSelf: 'center',
+    marginBottom: '20%',
   },
 });

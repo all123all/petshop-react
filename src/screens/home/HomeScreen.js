@@ -38,13 +38,18 @@ export default class HomeScreen extends React.Component {
           </TouchableOpacity>
           <TouchableOpacity 
             style={styles.btnOptionClientes}
-            onPress={() => this.props.navigation.navigate('')}>
+            onPress={() => this.props.navigation.navigate('ServiceScreen')}>
             <Text style={{color: 'white'}}>Serviços</Text>
           </TouchableOpacity>
           <TouchableOpacity 
             style={styles.btnOptionClientes}
             onPress={() => this.props.navigation.navigate('')}>
             <Text style={{color: 'white'}}>Transporte</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={styles.btnOptionClientes}
+            onPress={() => this.props.navigation.navigate('')}>
+            <Text style={{color: 'white'}}>Relatórios</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -66,7 +71,7 @@ const styles = StyleSheet.create({
   btnOptionClientes:{
     marginTop: '1%',
     width: '100%',
-    height: '13%',
+    height: '10%',
     backgroundColor: '#AF3E2E',
     borderRadius: 5,
     alignItems: 'center',
