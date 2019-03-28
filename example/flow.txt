@@ -3,9 +3,9 @@ Seguem abaixo a descrição do projeto de vocês e um exemplo das telas.
 PET - SHOP
 
 	- USUÁRIOS
-	- CADASTRO
-	- CONSULTA
-	- RELATORIO
+	- CADASTRO 		- URGÊNCIA
+	- CONSULTA 		- URGÊNCIA
+	- RELATORIO 	- URGÊNCIA
 	- NÍVEL DE ACESSO
 	- LOGIN
 
@@ -36,6 +36,11 @@ PET - SHOP
 TODOS OS RELATÓRIOS FICARÃO NUMA PÁGINA
 PRÓPRIA APENAS PARA RELATÓRIOS QUE PODERÁ
 SER ACESSADA ATRAVÉS DA HOMESCREEN
+
+FONTE A SER USADA PARA O BACK-END:
+https://reactnativecode.com/react-native-insert-text-input-data-to-mysql-server/
+https://tutorialscapital.com/insert-data-into-database-through-php-mysql-react-native-android-ios-tutorial/
+
 
 COLORS:
 #AF3E2E

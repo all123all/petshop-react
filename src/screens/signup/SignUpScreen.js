@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableHighlight, AppRegistry } from 'react-native';
 import { Image, Input } from 'react-native-elements';
 const util = require('util');
 
@@ -7,6 +7,59 @@ export default class SignUpScreen extends React.Component {
   static navigationOptions ={
     title: 'Cadastrar'
   };
+
+  constructor(props){
+    super(props)
+
+    this.state ={
+      TextInputName: '',
+      TextInputEmail: '',
+      TextInputUsername: '',
+      TextInputPassword: '',
+    }
+  }
+
+  InsertDataToServer = () => {
+    const {TextInputName} = this.state;
+    const {TextInputEmail} = this.state;
+    const {TextInputUsername} = this.state;
+    const {TextInputPassword} = this.state;
+
+    //alert('Cadastro realizado com sucesso!');
+    //this.props.navigation.navigate('LoginScreen');
+
+    fetch('http://127.0.1.1/petshop-react/test.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+
+        body: JSON.stringify({ 
+          // name: TextInputName,     
+          // email: TextInputEmail,     
+          // username: TextInputUsername,
+          // password: TextInputPassword,
+          'key': 'test',
+      })     
+    })
+    
+    // .then((response) => response.json())
+    //       .then((responseJson) => {
+     
+    //         Alert.alert(responseJson);
+     
+    //       }).catch((error) => {
+    //         console.error(error);
+    //       });
+
+      .then((response) => response.json())
+      .then((res) => {
+        alert(res.message);
+      })
+
+      .done();
+      }
 
   render() {
     return (
@@ -26,21 +79,26 @@ export default class SignUpScreen extends React.Component {
           <TextInput 
             placeholder="Nome completo"
             style={styles.loginPanelInput}
+            onChangeText={TextInputName => this.setState({TextInputName})}
           />
           <TextInput 
             placeholder="e-mail"
             style={styles.loginPanelInput}
+            onChangeText={TextInputEmail => this.setState({TextInputEmail})}
           />
           <TextInput 
             placeholder="usuario"
             style={styles.loginPanelInput}
+            onChangeText={TextInputUsername => this.setState({TextInputUsername})}
           />
           <TextInput 
             placeholder="senha"
+            onChangeText={TextInputPassword => this.setState({TextInputPassword})}
             style={styles.loginPanelInput}
           />
           <TouchableHighlight style={styles.loginPanelBtnAlt}
-          onPress={() => this.props.navigation.navigate('LoginScreen')}>
+            onPress={() => this.props.navigation.navigate('LoginScreen')}
+            onPress={this.InsertDataToServer()}>
             <Text style={{color: 'white'}}>CONCLUIR</Text>
           </TouchableHighlight>
         </View>        
