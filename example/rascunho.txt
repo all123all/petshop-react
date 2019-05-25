@@ -1,0 +1,313 @@
+import React from 'react';
+import { StyleSheet, Text, View, TextInput, ListView, TouchableHighlight, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
+import { Image } from 'react-native-elements';
+const util = require('util');
+
+export default class LoginScreen extends React.Component {
+  static navigationOptions ={
+    title: 'Login'
+  };
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+      isLoading: true,
+    }
+  }
+
+  componentDidMount(){
+    return fetch('http://192.168.56.1/petshop-react/src/con/submit_user_info.php')
+    .then((response) => response.json())
+    .then((responseJson) =>{
+      let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+      this.setState({
+        isLoading: false,
+        dataSource: ds.cloneWithRows(responseJson),
+      }, function(){
+        //feel free to create anything here
+      });
+    })
+    .catch((error) =>{
+      console.error(error);
+    });
+  }
+
+  GetItem(username){
+    alert(username);
+  }
+
+  ListViewItemSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 2,
+          width: "100%",
+          backgroundColor: "#000",
+        }}
+      />
+    );
+  }
+
+  render() {
+    if(this.state.isLoading) {
+      return(
+        <View style={{flex: 1, paddingTop: 20}}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
+    return (
+      <View style={styles.container}>
+        <Image 
+          source={require('../../../assets/img/logo.jpeg')}
+          style={{width: 200, height: 200}}
+        />
+
+        {/* <View style={styles.loginPanel}>
+            <TextInput 
+              placeholder="usuario"
+              style={styles.loginPanelInput}
+            />
+            <TextInput 
+              placeholder="senha"
+              style={styles.loginPanelInput}
+            />
+            <TouchableHighlight style={styles.loginPanelBtn}
+            onPress={() => this.props.navigation.navigate('HomeScreen')}>
+              <Text style={{color: 'white'}}>LOGIN</Text>
+            </TouchableHighlight>
+
+            <TouchableHighlight style={styles.loginPanelBtnAlt}
+              onPress={() => this.props.navigation.navigate('SignUpScreen')}>
+              <Text style={{color: 'white'}} onPress={() => this.props.navigation.navigate('SignUpScreen')}>CADASTRAR</Text>
+            </TouchableHighlight>
+        </View>    */}
+
+        <View style={styles.MainContainer}>
+          <ListView 
+            dataSource={this.state.dataSource}
+            renderSeparator= {this.ListViewItemSeparator}
+            enableEmptySections = {true}
+            renderRow={(rowData) => <Text style={styles.rowViewContainer} 
+            onPress={this.GetItem.bind(this, rowData.username)} >{rowData.username}</Text>}
+        />
+        </View>     
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loginPanel:{
+    width: '60%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loginPanelInput:{
+    marginTop: '3%',
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#000',
+    width: '100%',
+    height: '10%',
+    padding: 4,
+  },
+  loginPanelBtn:{
+    width: '100%',
+    marginTop: '10%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#E95C41',
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#000',
+    height: '10%'
+  },
+  loginPanelBtnAlt:{
+    width: '100%',
+    marginTop: '3%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ACACAC',
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#000',
+    height: '10%'
+  },
+  MainContainer :{
+    justifyContent: 'center',
+    flex:1,
+    margin: 10
+     
+  },    
+  rowViewContainer: {
+    fontSize: 20,
+    paddingRight: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
+  }
+});
+
+
+SIGNUPCREEN.JS 
+
+import React from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableHighlight, AppRegistry } from 'react-native';
+import { Image, Input } from 'react-native-elements';
+const util = require('util');
+
+export default class SignUpScreen extends React.Component {
+  static navigationOptions ={
+    title: 'Cadastrar'
+  };
+
+  constructor(props){
+    super(props)
+
+    this.state ={
+      TextInputName: '',
+      TextInputEmail: '',
+      TextInputUsername: '',
+      TextInputPassword: '',
+    }
+  }
+
+  InsertDataToServer = () => {
+    const {TextInputName} = this.state;
+    const {TextInputEmail} = this.state;
+    const {TextInputUsername} = this.state;
+    const {TextInputPassword} = this.state;
+
+    //alert('Cadastro realizado com sucesso!');
+    //this.props.navigation.navigate('LoginScreen');
+
+    fetch('http://127.0.1.1/petshop-react/test.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+
+        body: JSON.stringify({ 
+          // name: TextInputName,     
+          // email: TextInputEmail,     
+          // username: TextInputUsername,
+          // password: TextInputPassword,
+          'key': 'test',
+      })     
+    })
+    
+    // .then((response) => response.json())
+    //       .then((responseJson) => {
+     
+    //         Alert.alert(responseJson);
+     
+    //       }).catch((error) => {
+    //         console.error(error);
+    //       });
+
+      .then((response) => response.json())
+      .then((res) => {
+        alert(res.message);
+      })
+
+      .done();
+      }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Image 
+          source={require('../../../assets/img/logo.jpeg')}
+          style={{width: 100, height: 100}}
+        />
+
+        <View>
+            <Text>
+                INFORME ALGUNS DADOS
+            </Text>
+        </View>
+
+        <View style={styles.loginPanel}>
+          <TextInput 
+            placeholder="Nome completo"
+            style={styles.loginPanelInput}
+            onChangeText={TextInputName => this.setState({TextInputName})}
+          />
+          <TextInput 
+            placeholder="e-mail"
+            style={styles.loginPanelInput}
+            onChangeText={TextInputEmail => this.setState({TextInputEmail})}
+          />
+          <TextInput 
+            placeholder="usuario"
+            style={styles.loginPanelInput}
+            onChangeText={TextInputUsername => this.setState({TextInputUsername})}
+          />
+          <TextInput 
+            placeholder="senha"
+            onChangeText={TextInputPassword => this.setState({TextInputPassword})}
+            style={styles.loginPanelInput}
+          />
+          <TouchableHighlight style={styles.loginPanelBtnAlt}
+            onPress={() => this.props.navigation.navigate('LoginScreen')}
+            onPress={this.InsertDataToServer()}>
+            <Text style={{color: 'white'}}>CONCLUIR</Text>
+          </TouchableHighlight>
+        </View>        
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loginPanel:{
+    width: '60%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loginPanelInput:{
+    marginTop: '3%',
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#000',
+    width: '100%',
+    height: '10%',
+    padding: 4,
+  },
+  loginPanelBtn:{
+    width: '100%',
+    marginTop: '10%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#B3402E',
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#000',
+    height: '10%'
+  },
+  loginPanelBtnAlt:{
+    width: '100%',
+    marginTop: '3%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#E95C41',
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#000',
+    height: '10%'
+  },
+});

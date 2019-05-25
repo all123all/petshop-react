@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ListView, TouchableHighlight, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
 import { Image } from 'react-native-elements';
 const util = require('util');
 
@@ -7,6 +7,14 @@ export default class LoginScreen extends React.Component {
   static navigationOptions ={
     title: 'Login'
   };
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+      isLoading: true,
+    }
+  }
 
   render() {
     return (
@@ -34,7 +42,7 @@ export default class LoginScreen extends React.Component {
               onPress={() => this.props.navigation.navigate('SignUpScreen')}>
               <Text style={{color: 'white'}} onPress={() => this.props.navigation.navigate('SignUpScreen')}>CADASTRAR</Text>
             </TouchableHighlight>
-        </View>        
+        </View>    
       </View>
     );
   }

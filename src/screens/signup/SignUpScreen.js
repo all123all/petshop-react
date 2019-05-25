@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableHighlight, AppRegistry } from 'react-native';
 import { Image, Input } from 'react-native-elements';
+//import console = require('console');
 const util = require('util');
 
 export default class SignUpScreen extends React.Component {
@@ -19,48 +20,28 @@ export default class SignUpScreen extends React.Component {
     }
   }
 
-  InsertDataToServer = () => {
-    const {TextInputName} = this.state;
-    const {TextInputEmail} = this.state;
-    const {TextInputUsername} = this.state;
-    const {TextInputPassword} = this.state;
-
-    //alert('Cadastro realizado com sucesso!');
-    //this.props.navigation.navigate('LoginScreen');
-
-    fetch('http://127.0.1.1/petshop-react/test.php', {
+  UserRegistration = () => {
+    fetch('http://192.168.56.1/petshop-react/src/con/submit_user_info.php', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-
-        body: JSON.stringify({ 
-          // name: TextInputName,     
-          // email: TextInputEmail,     
-          // username: TextInputUsername,
-          // password: TextInputPassword,
-          'key': 'test',
-      })     
-    })
-    
-    // .then((response) => response.json())
-    //       .then((responseJson) => {
-     
-    //         Alert.alert(responseJson);
-     
-    //       }).catch((error) => {
-    //         console.error(error);
-    //       });
-
-      .then((response) => response.json())
-      .then((res) => {
-        alert(res.message);
+      body: JSON.stringify({
+        name: this.state.TextInputName,
+        email: this.state.TextInputEmail,
+        username: this.state.TextInputUsername,
+        password: this.state.TextInputPassword,
       })
-
-      .done();
-      }
-
+    }).then((response) => response.json())
+      .then((responseJson) => {
+        alert(responseJson);
+        this.props.navigation.navigate('LoginScreen');
+      }).catch((error) => {
+        console.error(error);
+      });
+  }
+  
   render() {
     return (
       <View style={styles.container}>
@@ -79,26 +60,25 @@ export default class SignUpScreen extends React.Component {
           <TextInput 
             placeholder="Nome completo"
             style={styles.loginPanelInput}
-            onChangeText={TextInputName => this.setState({TextInputName})}
+            onChangeText={name => this.setState({TextInputName : name})}
           />
           <TextInput 
             placeholder="e-mail"
             style={styles.loginPanelInput}
-            onChangeText={TextInputEmail => this.setState({TextInputEmail})}
+            onChangeText={email => this.setState({TextInputEmail : email})}
           />
           <TextInput 
             placeholder="usuario"
             style={styles.loginPanelInput}
-            onChangeText={TextInputUsername => this.setState({TextInputUsername})}
+            onChangeText={username => this.setState({TextInputUsername : username})}
           />
           <TextInput 
             placeholder="senha"
-            onChangeText={TextInputPassword => this.setState({TextInputPassword})}
+            onChangeText={password => this.setState({TextInputPassword : password})}
             style={styles.loginPanelInput}
           />
           <TouchableHighlight style={styles.loginPanelBtnAlt}
-            onPress={() => this.props.navigation.navigate('LoginScreen')}
-            onPress={this.InsertDataToServer()}>
+            onPress={this.UserRegistration}>
             <Text style={{color: 'white'}}>CONCLUIR</Text>
           </TouchableHighlight>
         </View>        
