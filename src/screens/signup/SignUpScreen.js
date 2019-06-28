@@ -35,8 +35,12 @@ export default class SignUpScreen extends React.Component {
       })
     }).then((response) => response.json())
       .then((responseJson) => {
+        if(responseJson == "Choose another email."){
+          this.props.navigation.navigate('SignUpScreen');
+        }else{
+          this.props.navigation.navigate('LoginScreen');
+        }
         alert(responseJson);
-        this.props.navigation.navigate('LoginScreen');
       }).catch((error) => {
         console.error(error);
       });
@@ -74,6 +78,7 @@ export default class SignUpScreen extends React.Component {
           />
           <TextInput 
             placeholder="senha"
+            secureTextEntry={true}
             onChangeText={password => this.setState({TextInputPassword : password})}
             style={styles.loginPanelInput}
           />

@@ -1,6 +1,5 @@
-<?php
-include 'DBConfig.php';
- 
+<?php 
+include '../DBConfig.php';
 // Creating connection.
 $con = mysqli_connect($HostName,$HostUser,$HostPass,$DatabaseName);
 
@@ -9,19 +8,19 @@ $obj = json_decode($json, true);
 
 $name = $obj['name'];
 $email = $obj['email'];
-$username = $obj['username'];
-$password = $obj['password'];
+$owner_name = $obj['owner_name'];
+$age = $obj['age'];
 
 //Checking if the email is already registered in the database
-$CheckSQL = "SELECT * FROM user WHERE email='$email'";
+$CheckSQL = "SELECT * FROM pet WHERE email='$email'";
 $check = mysqli_fetch_array(mysqli_query($con, $CheckSQL));
 
 if(isset($check)){
-    $EmailExistMSG = "Choose another email.";
+    $EmailExistMSG = "invalid";
     $EmailExistJson = json_encode($EmailExistMSG);
     echo $EmailExistJson;
 }else{
-    $InsertSQL = "INSERT INTO user (username, password, name, email) VALUES ('$username', '$password', '$name', '$email')";
+    $InsertSQL = "INSERT INTO pet (owner_name, name, age, email) VALUES ('$owner_name', '$name', '$age', '$email')";
 
     mysqli_query($con, $InsertSQL);
 

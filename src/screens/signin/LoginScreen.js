@@ -12,8 +12,34 @@ export default class LoginScreen extends React.Component {
     super(props);
 
     this.state = {
-      isLoading: true,
+      //isLoading: true,
+      TextInputUsername: '',
+      TextInputPassword: '',
     }
+  }
+
+  UserLogin = () => {
+    fetch('http://192.168.56.1/petshop-react/src/con/login.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: this.state.TextInputUsername,
+        password: this.state.TextInputPassword,
+      })
+    }).then((response) => response.json())
+      .then((responseJson) => {
+        if(responseJson == "success"){
+          this.props.navigation.navigate('HomeScreen');
+        }else{
+          this.props.navigation.navigate('LoginScreen');
+          alert(responseJson);
+        }        
+      }).catch((error) => {
+        console.error(error);
+      });
   }
 
   render() {
@@ -28,13 +54,16 @@ export default class LoginScreen extends React.Component {
             <TextInput 
               placeholder="usuario"
               style={styles.loginPanelInput}
+              onChangeText={username => this.setState({TextInputUsername : username})}
             />
             <TextInput 
               placeholder="senha"
               style={styles.loginPanelInput}
+              secureTextEntry={true}
+              onChangeText={password => this.setState({TextInputPassword : password})}
             />
             <TouchableHighlight style={styles.loginPanelBtn}
-            onPress={() => this.props.navigation.navigate('HomeScreen')}>
+            onPress={this.UserLogin}>
               <Text style={{color: 'white'}}>LOGIN</Text>
             </TouchableHighlight>
 

@@ -8,6 +8,42 @@ export default class RegisterCostumerScreen extends React.Component {
     title: 'Cadastrar'
   };
 
+  constructor(props){
+    super(props)
+
+    this.state={
+      TextInputOwnerName: '',
+      TextInputEmail: '',
+      TextInputName: '',
+      TextInputAge: '',
+    }
+  }
+
+  UserRegistration = () => {
+    fetch('http://192.168.56.1/petshop-react/src/con/create/RegisterCostumer.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: this.state.TextInputName,
+        email: this.state.TextInputEmail,
+        owner_name: this.state.TextInputOwnerName,
+        age: this.state.TextInputAge,
+      })
+    }).then((response) => response.json())
+      .then((responseJson) => {
+        if(responseJson == "invalid"){
+          this.props.navigation.navigate('LoginScreen');
+        }else{
+          this.props.navigation.navigate('CostumersScreen');
+        }
+        alert(responseJson);
+      }).catch((error) => {
+        console.error(error);
+      });
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -21,22 +57,26 @@ export default class RegisterCostumerScreen extends React.Component {
           <TextInput 
             placeholder="Nome completo do Dono"
             style={styles.loginPanelInput}
+            onChangeText={owner_name => this.setState({TextInputOwnerName : owner_name})}
           />
           <TextInput 
             placeholder="E-mail"
             style={styles.loginPanelInput}
+            onChangeText={email => this.setState({TextInputEmail : email})}
           />
           <TextInput 
             placeholder="Nome do Pet"
             style={styles.loginPanelInput}
+            onChangeText={name => this.setState({TextInputName : name})}
           />
           <TextInput 
             placeholder="Idade do Pet"
             style={styles.loginPanelInput}
             keyboardType="number-pad"
+            onChangeText={age => this.setState({TextInputAge : age})}
           />
           <TouchableHighlight style={styles.loginPanelBtnAlt}
-          onPress={() => this.props.navigation.navigate('CostumersScreen')}>
+            onPress={this.UserRegistration}>
             <Text style={{color: 'white'}}>CONCLUIR</Text>
           </TouchableHighlight>
         </View>        

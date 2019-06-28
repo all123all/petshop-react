@@ -2,12 +2,12 @@ Seguem abaixo a descrição do projeto de vocês e um exemplo das telas.
 
 PET - SHOP
 
-	- USUÁRIOS
-	- CADASTRO 		- URGÊNCIA
-	- CONSULTA 		- URGÊNCIA
-	- RELATORIO 	- URGÊNCIA
-	- NÍVEL DE ACESSO
-	- LOGIN
+	- USUÁRIOS			- FEITO
+	- CADASTRO 			- URGÊNCIA
+	- CONSULTA 			- URGÊNCIA
+	- RELATORIO 		- URGÊNCIA
+	- NÍVEL DE ACESSO	- URGÊNCIA
+	- LOGIN				- FEITO
 
 	- CLIENTES
 	CADASTRO
@@ -27,7 +27,6 @@ PET - SHOP
 		CADASTRO
 		CONSULTA
 		RELATORIO
-
 
 	- TRANSPORTE
 		AGENDAMENTO
